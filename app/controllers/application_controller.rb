@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     @application = Application.find(params[:id])
   end
 
+  def new
+
+  end
+
   private
 
   def error_message(errors)
