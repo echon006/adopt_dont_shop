@@ -1,20 +1,33 @@
+
+
+
 <fieldset>
-<legend>Creating new level</legend>
+<legend>Starting a new application</legend>
+<br>
 <%= form_with url: '/applications', method: :post, local: true do |form| %>
   <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, :required => true %>
   <br>
   <%= form.label :street_address %>
-  <%= form.text_field :street_address %>
+  <%= form.text_field :street_address, :required => true %>
   <br>
   <%= form.label :city %>
-  <%= form.number_field :city %>
+  <%= form.text_field :city, :required => true %>
   <br>
   <%= form.label :state %>
-  <%= form.number_field :state%>
+  <%= form.text_field :state, :required => true %>
   <br>
   <%= form.label :zip_code %>
-  <%= form.number_field :zip_code%>
+  <%= form.text_field :zip_code, :required => true %>
+  <br>
+  <br>
+  <fieldset>
+    <legend> Add pet(s) by name: </legend>
+    <%= form.label "Search for pet" %>
+    <%= form.text_field :search, value: params[:search]%>
+    <%= submit_tag "Search", :name => nil %>
+    <p> Pets added:</p>
+    </fieldset>
   <br>
   <%= form.submit "Submit" %>
 
