@@ -21,6 +21,7 @@ RSpec.describe 'application#new' do
       fill_in "state", with: "CO"
       fill_in "zip_code", with: "80016"
 
+
       click_button('Submit')
       application_id = Application.last.id
 
@@ -30,15 +31,18 @@ RSpec.describe 'application#new' do
       expect(page).to have_content("Aurora")
       expect(page).to have_content("CO")
       expect(page).to have_content("80016")
+
   end
 
-  xit "checks that you cannot submit if parts are not filled in" do
+  it "checks that you cannot submit if parts are not filled in" do
     visit '/applications/new'
+    fill_in "street_address", with: "555 Turing st"
     fill_in "city", with: "Aurora"
     fill_in "state", with: "CO"
+    fill_in "zip_code", with: "80016"
 
     click_button('Submit')
-    expect(current_path).to eq("/applications/new")
+    expect(page).to have_content("Application not created, informaiton missing")
   end
 
 

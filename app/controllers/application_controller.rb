@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     @application = Application.find(params[:id])
     if params[:pet_name].present?
       @pets = Pet.search(params[:pet_name])
-    end 
+    end
   end
 
   def new
@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
     if @application.save
       redirect_to "/applications/#{@application.id}"
     else
+      @flash_message = "Application not created, informaiton missing"
       render :new
     end
   end
