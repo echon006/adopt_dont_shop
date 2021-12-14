@@ -21,15 +21,6 @@
   <%= form.text_field :zip_code, :required => true %>
   <br>
   <br>
-  <fieldset>
-    <legend> Add pet(s) by name: </legend>
-    <%= form.label "Search for pet" %>
-    <%= form.text_field :search, value: params[:search]%>
-    <%= submit_tag "Search", :name => nil %>
-    <p> Pets added:</p>
-    </fieldset>
-  <br>
   <%= form.submit "Submit" %>
-
 <% end %>
 </fieldset>
