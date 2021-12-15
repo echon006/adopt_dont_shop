@@ -1,9 +1,10 @@
 <h1> Application </h1>
 <body>
   <%= @pending_message %>
-  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+  <%= form_with url: "/applications/#{@application.id}/application_pets", method: :patch, local: true do |form| %>
     <% if (@application.pets.count >= 1) %>
       <%= form.submit "Submit" %>
+
     <% end %>
     <p>Name: <%= @application.name %></p>
     <p>Street address: <%= @application.street_address %></p>
@@ -12,6 +13,7 @@
     <p>Zip Code: <%= @application.zip_code %></p>
     <p>Pets: <% @application.pets.each do |pet| %>
       <%= link_to "#{pet.name}" + ",", "/pets/#{pet.id}" %>
+
     <% end  %>
     </p>
     <br>
@@ -20,19 +22,23 @@
       <%= form.text_area :reason_good_owner, :required => true   %>
   <% end %>
       <br>
-      <%= form_with url: "/applications/#{@application.id}?search=pet_name", method: :get, local: true do |form| %>
-    <fieldset>
-      <legend> Add pet(s) by name: </legend>
-      <%= form.label :pet_name %>
-      <%= form.text_field :pet_name%>
-      <%= form.submit "Search" %>
-    </fieldset>
-    <% end %>
+
+        <%= form_with url: "/applications/#{@application.id}?search=pet_name", method: :get, local: true do |form| %>
+      <fieldset>
+          <legend> Add pet(s) by name: </legend>
+          <%= form.label :pet_name %>
+          <%= form.text_field :pet_name%>
+          <%= form.submit "Search" %>
+          <% end %>
+      </fieldset>
   <br>
   <% if @pets.present? %>
     <% @pets.each do |pet| %>
       <%= pet.name  %>
-      <%=  button_to "Adopt pet", "/application_pets/new", method: :post, params: { :application_id => @application.id, :pet_id => pet.id} %>
+      <%=  button_to "Adopt pet", "/application_pets", method: :post, params: { :application_id => @application.id, :pet_id => pet.id} %>
       <% end %>
   <% end  %>
 </body>
+
+<% if @app_pets.any? { |app_pet| app_pet.pending? == false  } %>
+<% end %>

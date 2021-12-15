@@ -7,10 +7,8 @@ class ApplicationController < ActionController::Base
     @application = Application.find(params[:id])
     if params[:pet_name].present?
       @pets = Pet.search(params[:pet_name])
-      # if @application.pending == true
-      #   @pending_message = "Pending"
-      # end
     end
+    @app_pets = ApplicationPet.where(application_id: params[:id])
   end
 
   def new
@@ -25,6 +23,11 @@ class ApplicationController < ActionController::Base
       @flash_message = "Application not created, informaiton missing"
       render :new
     end
+  end
+
+  def update
+    @application = Application.find(params[:id])
+
   end
 
   private

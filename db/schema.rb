@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2021_12_09_230042) do
   enable_extension "plpgsql"
 
   create_table "application_pets", force: :cascade do |t|
+    t.integer "status"
+    t.string "reason_good_owner"
     t.bigint "pet_id"
     t.bigint "application_id"
     t.datetime "created_at", null: false
@@ -30,8 +32,6 @@ ActiveRecord::Schema.define(version: 2021_12_09_230042) do
     t.string "city"
     t.string "state"
     t.string "zip_code"
-    t.string "reason_good_owner"
-    t.boolean "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
