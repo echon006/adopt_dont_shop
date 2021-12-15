@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
     @application = Application.find(params[:id])
     if params[:pet_name].present?
       @pets = Pet.search(params[:pet_name])
+      # if @application.pending == true
+      #   @pending_message = "Pending"
+      # end
     end
   end
 

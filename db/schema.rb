@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_12_09_230042) do
     t.string "state"
     t.string "zip_code"
     t.string "reason_good_owner"
+    t.boolean "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
